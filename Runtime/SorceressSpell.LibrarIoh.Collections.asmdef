@@ -1,0 +1,17 @@
+{
+    "name": "SorceressSpell.LibrarIoh.Collections",
+    "rootNamespace": "SorceressSpell.LibrarIoh.Collections",
+    "references": [
+        "SorceressSpell.LibrarIoh",
+        "SorceressSpell.LibrarIoh.Xml"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

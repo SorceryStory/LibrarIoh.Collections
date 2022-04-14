@@ -1,0 +1,21 @@
+{
+  "name": "com.sorceressspell.librarioh.collections",
+  "displayName": "LibrarIoh.Collections",
+  "version": "0.2.0",
+  "type": "library",
+  "unity": "2018.1",
+  "description": "LibrarIoh.Collections (https://github.com/SorceressSpell/LibrarIoh.Collections)\nExtended Collections for LibrarIoh.\n\nDepends on:\n  - LibrarIoh.Core (https://github.com/SorceressSpell/LibrarIoh.Core)\n  - LibrarIoh.ExtensibleMarkupLanguage (https://github.com/SorceressSpell/LibrarIoh.ExtensibleMarkupLanguage)",
+  "dependencies": {
+    "com.sorceressspell.librarioh.core": "0.2.0",
+    "com.sorceressspell.librarioh.xml": "0.2.0"
+  },
+  "author": {
+    "name": "Sorceress' Spell",
+    "email": "Sorceress.Spell@gmail.com",
+    "url": "https://SorceressSpell.com/"
+  },
+  "keywords": [
+    "librarioh",
+    "collections"
+  ]
+}
