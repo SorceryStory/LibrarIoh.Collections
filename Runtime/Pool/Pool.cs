@@ -59,11 +59,11 @@ namespace SorceressSpell.LibrarIoh.Collections
             }
         }
 
-        public void DeActivateAll()
+        public void DeactivateAll()
         {
             foreach (TPoolObject poolObject in PoolCollection)
             {
-                poolObject.DeActivate();
+                poolObject.Deactivate();
             }
         }
 
@@ -87,28 +87,32 @@ namespace SorceressSpell.LibrarIoh.Collections
 
         protected TPoolObject CreateNewPoolObject()
         {
-            TPoolObject poolObject = CreatePoolObject();
+            TPoolObject poolObject = Pool_CreatePoolObject();
 
-            poolObject.Initialize(GetNewObjectName());
-            poolObject.DeActivate();
+            poolObject.Initialize(Pool_GetNewObjectName());
+            poolObject.Deactivate();
 
             PoolCollection.Add(poolObject);
 
             return poolObject;
         }
 
-        protected virtual TPoolObject CreatePoolObject()
+        protected virtual TPoolObject Pool_CreatePoolObject()
         {
             return new TPoolObject();
         }
 
-        protected virtual string GetNewObjectName()
+        protected virtual string Pool_GetNewObjectName()
         {
             return PoolCollection.Count.ToString();
         }
 
-        protected virtual void PostDestroyAll()
+        protected virtual void Pool_PostDestroyAll()
+        { }
+
+        protected void PostDestroyAll()
         {
+            Pool_PostDestroyAll();
         }
 
         private TPoolObject GetFirstUnused()

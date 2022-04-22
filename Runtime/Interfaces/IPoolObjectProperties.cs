@@ -1,6 +1,6 @@
 namespace SorceressSpell.LibrarIoh.Collections
 {
-    public interface IPoolObjectProperties<TPoolObject>
+    public interface IPoolObjectProperties<in TPoolObject>
     {
         #region Methods
 

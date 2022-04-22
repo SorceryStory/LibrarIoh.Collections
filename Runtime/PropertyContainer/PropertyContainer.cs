@@ -14,10 +14,25 @@ namespace SorceressSpell.LibrarIoh.Collections
 
         #region Properties
 
-        public int Count => ((IDictionary<string, TValue>)Properties).Count;
-        public bool IsReadOnly => ((IDictionary<string, TValue>)Properties).IsReadOnly;
-        public ICollection<string> Keys => ((IDictionary<string, TValue>)Properties).Keys;
-        public ICollection<TValue> Values => ((IDictionary<string, TValue>)Properties).Values;
+        public int Count
+        {
+            get { return ((IDictionary<string, TValue>)Properties).Count; }
+        }
+
+        public bool IsReadOnly
+        {
+            get { return ((IDictionary<string, TValue>)Properties).IsReadOnly; }
+        }
+
+        public ICollection<string> Keys
+        {
+            get { return ((IDictionary<string, TValue>)Properties).Keys; }
+        }
+
+        public ICollection<TValue> Values
+        {
+            get { return ((IDictionary<string, TValue>)Properties).Values; }
+        }
 
         #endregion Properties
 
@@ -130,7 +145,6 @@ namespace SorceressSpell.LibrarIoh.Collections
 
         #region Indexers
 
-        // Properties
         public TValue this[string key]
         {
             get { return ((IDictionary<string, TValue>)Properties)[key]; }

@@ -1,12 +1,12 @@
 namespace SorceressSpell.LibrarIoh.Collections
 {
-    public interface IPoolObject<TProperties>
+    public interface IPoolObject<in TProperties>
     {
         #region Methods
 
         void Activate(TProperties properties);
 
-        void DeActivate();
+        void Deactivate();
 
         void Destroy();
 
