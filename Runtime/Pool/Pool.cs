@@ -1,49 +1,48 @@
+using System;
 using System.Collections.Generic;
 
 namespace SorceressSpell.LibrarIoh.Collections
 {
-    public class Pool<TPoolObject, TPoolObjectProperties>
-        where TPoolObject : IPoolObject<TPoolObjectProperties>, new()
-        where TPoolObjectProperties : IPoolObjectProperties<TPoolObject>
+    public class Pool<TObject>
+        where TObject : IPoolObject, new()
     {
         #region Fields
 
-        protected readonly List<TPoolObject> PoolCollection;
+        protected readonly List<TObject> PoolCollection;
 
         #endregion Fields
 
         #region Constructors
 
-        public Pool(int preAllocate)
+        public Pool(int preAllocate = 0)
             : this()
         {
             Allocate(preAllocate);
         }
 
-        protected Pool()
+        public Pool()
         {
-            PoolCollection = new List<TPoolObject>();
+            PoolCollection = new List<TObject>();
         }
 
         #endregion Constructors
 
         #region Methods
 
-        public TPoolObject Activate(TPoolObjectProperties objectProperties)
+        public TObject Activate(IPoolObjectProperties<TObject> objectProperties)
         {
-            TPoolObject poolObject = GetFirstUnused();
-
-            if (poolObject == null)
+            if (!TryGetFirstUnused(out TObject poolObject))
             {
                 poolObject = CreateNewPoolObject();
             }
 
-            poolObject.Activate(objectProperties);
+            objectProperties.ApplyTo(poolObject);
+            poolObject.Activate();
 
             return poolObject;
         }
 
-        public void Activate(int number, TPoolObjectProperties objectProperties)
+        public void Activate(int number, IPoolObjectProperties<TObject> objectProperties)
         {
             for (int i = 0; i < number; i++)
             {
@@ -59,17 +58,33 @@ namespace SorceressSpell.LibrarIoh.Collections
             }
         }
 
+        public void ApplyPropertiesToAll(IPoolObjectProperties<TObject> properties)
+        {
+            foreach (TObject obj in PoolCollection)
+            {
+                properties.ApplyTo(obj);
+            }
+        }
+
+        public void ApplyProperties(Predicate<TObject> objectFilter, IPoolObjectProperties<TObject> properties)
+        {
+            foreach (TObject obj in PoolCollection.FindAll(objectFilter))
+            {
+                properties.ApplyTo(obj);
+            }
+        }
+
         public void DeactivateAll()
         {
-            foreach (TPoolObject poolObject in PoolCollection)
+            foreach (TObject poolObject in PoolCollection)
             {
                 poolObject.Deactivate();
             }
         }
 
-        public virtual void DestroyAll()
+        public void DestroyAll()
         {
-            foreach (TPoolObject poolObject in PoolCollection)
+            foreach (TObject poolObject in PoolCollection)
             {
                 poolObject.Destroy();
             }
@@ -77,17 +92,20 @@ namespace SorceressSpell.LibrarIoh.Collections
             PostDestroyAll();
         }
 
-        public virtual void Update(float deltaTime)
+        public void Update(float deltaTime)
         {
-            foreach (TPoolObject poolObject in PoolCollection)
+            foreach (TObject poolObject in PoolCollection)
             {
-                poolObject.Update(deltaTime);
+                if (poolObject.IsActive())
+                {
+                    poolObject.Update(deltaTime);
+                }
             }
         }
 
-        protected TPoolObject CreateNewPoolObject()
+        protected TObject CreateNewPoolObject()
         {
-            TPoolObject poolObject = Pool_CreatePoolObject();
+            TObject poolObject = Pool_CreatePoolObject();
 
             poolObject.Initialize(Pool_GetNewObjectName());
             poolObject.Deactivate();
@@ -97,9 +115,9 @@ namespace SorceressSpell.LibrarIoh.Collections
             return poolObject;
         }
 
-        protected virtual TPoolObject Pool_CreatePoolObject()
+        protected virtual TObject Pool_CreatePoolObject()
         {
-            return new TPoolObject();
+            return new TObject();
         }
 
         protected virtual string Pool_GetNewObjectName()
@@ -115,20 +133,22 @@ namespace SorceressSpell.LibrarIoh.Collections
             Pool_PostDestroyAll();
         }
 
-        private TPoolObject GetFirstUnused()
+        private bool TryGetFirstUnused(out TObject obj)
         {
             if (PoolCollection.Count > 0)
             {
-                foreach (TPoolObject poolObject in PoolCollection)
+                foreach (TObject poolObject in PoolCollection)
                 {
                     if (!poolObject.IsActive())
                     {
-                        return poolObject;
+                        obj = poolObject;
+                        return true;
                     }
                 }
             }
 
-            return default(TPoolObject);
+            obj = default(TObject);
+            return false;
         }
 
         #endregion Methods

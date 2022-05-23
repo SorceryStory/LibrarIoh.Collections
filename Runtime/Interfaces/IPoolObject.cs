@@ -1,10 +1,10 @@
 namespace SorceressSpell.LibrarIoh.Collections
 {
-    public interface IPoolObject<in TProperties>
+    public interface IPoolObject
     {
         #region Methods
 
-        void Activate(TProperties properties);
+        void Activate();
 
         void Deactivate();
 
@@ -13,8 +13,6 @@ namespace SorceressSpell.LibrarIoh.Collections
         void Initialize(string name);
 
         bool IsActive();
-
-        void LateUpdate(float deltaTime);
 
         void Update(float deltaTime);
 
