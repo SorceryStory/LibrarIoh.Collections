@@ -1,7 +1,7 @@
-# [LibrarIoh.Collections](https://github.com/SorceressSpell/LibrarIoh.Collections)
+# [LibrarIoh.Collections](https://github.com/SorceryStory/LibrarIoh.Collections)
 
 Extended Collections for LibrarIoh.
 
 ## Dependencies
 
-- [LibrarIoh.Core](https://github.com/SorceressSpell/LibrarIoh.Core)
+- [LibrarIoh.Core](https://github.com/SorceryStory/LibrarIoh.Core)
