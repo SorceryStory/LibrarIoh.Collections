@@ -1,12 +1,11 @@
 {
   "name": "com.sorceressspell.librarioh.collections",
   "displayName": "LibrarIoh.Collections",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "type": "library",
   "unity": "2018.1",
   "description": "LibrarIoh.Collections (https://github.com/SorceryStory/LibrarIoh.Collections)\n\nExtended Collections for LibrarIoh.\n\nDepends on:\n  - LibrarIoh.Core (https://github.com/SorceryStory/LibrarIoh.Core)",
-  "dependencies": {
-    "com.sorceressspell.librarioh.core": "0.3.0"
+  "dependencies": { 
   },
   "author": {
     "name": "Joana Almeida",

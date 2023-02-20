@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.1] - 2023-02-05
+
+### Added
+
+- Added a simple `PriorityQueue`.
+
 ## [0.3.0] - 2022-12-14
 
 ### Added
